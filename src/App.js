@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class App extends React.Component {
 
@@ -11,7 +14,7 @@ class App extends React.Component {
 
   getMemes = async (e) => {
     e.preventDefault()
-    this.setState({loading: true})
+    this.setState({loading: true, memes: []})
     var key = 'jhQazp87aPuMIRIZoFu2kaI2Uk5GjZRJ'
     var url = `http://api.giphy.com/v1/gifs/search?q=${this.state.text}&api_key=${key}`
     var r = await fetch(url)
@@ -24,13 +27,16 @@ class App extends React.Component {
   return (
     <div className="App">
     <form className="App-header" onSubmit={this.getMemes}>
-<input value={text}
+<TextField value={text}
+variant="outlined"
+label="Search for GIFs"
   onChange={e=> this.setState({text: e.target.value})}
 />
-<button className="button" disabled={loading || !text} type="submit">
+<Button variant="contained" color="primary" className="button" disabled={loading || !text} type="submit">
   Get GIF
-</button>
+</Button>
 </form>
+{loading &&<LinearProgress />}
       <main>
       {memes.map(meme=>{
         return <Meme key={meme.id} meme={meme} />})} 
