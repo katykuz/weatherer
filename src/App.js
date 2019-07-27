@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import moment from 'moment'
 import {Bar} from 'react-chartjs-2'
-//import Button from 'react-bootstrap/Button';
-//import Spinner from 'react-bootstrap/Spinner'
-//import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
+
 
 
 class App extends React.Component {
@@ -41,6 +42,36 @@ class App extends React.Component {
     }
   }
 
+  function simulateNetworkRequest() {
+    return new Promise(resolve => setTimeout(resolve, 2000));
+  }
+  
+  function LoadingButton() {
+    const [isLoading, setLoading] = useState(false);
+  
+    useEffect(() => {
+      if (isLoading) {
+        simulateNetworkRequest().then(() => {
+          setLoading(false);
+        });
+      }
+    }, [isLoading]);
+  
+    const handleClick = () => setLoading(true);
+  
+    return (
+      <Button
+        variant="primary"
+        disabled={isLoading}
+        onClick={!isLoading ? handleClick : null}
+      >
+        {isLoading ? 'Loading…' : 'Search'}
+      </Button>
+    );
+  }
+  
+  render(<LoadingButton />);
+
   render() {
     var {weather, loading, text, error} = this.state
     var data
@@ -68,9 +99,9 @@ label="Search for Weather"
   onChange={e=> this.setState({text: e.target.value})}
   style={{width:'100%', marginLeft:8}}
 />
-<Button variant="contained" color="primary" className="button" disabled={loading || !text} type="submit">
+{/*<Button variant="contained" color="primary" className="button" disabled={loading || !text} type="submit">
   Search
-</Button>
+  </Button>*/}
 </form>
 {loading &&<LinearProgress />}
       <main>
