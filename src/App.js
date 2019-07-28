@@ -1,16 +1,12 @@
 import React from 'react';
-
 import './App.css';
-
 import { Button } from 'reactstrap';
-
-import TextField from '@material-ui/core/TextField';
-
-import LinearProgress from '@material-ui/core/LinearProgress';
-
+import { Input } from 'antd';
+//import LinearProgress from '@material-ui/core/LinearProgress';
 import moment from 'moment'
-
 import {Bar} from 'react-chartjs-2'
+import { Spin, Icon } from 'antd';
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 
 
@@ -136,19 +132,12 @@ class App extends React.Component {
 
         <form className="App-header" onSubmit={this.getWeather}>
 
-          <TextField value={text}
-
-            autoFocus
-
-            variant="outlined"
-
-            label="Search for weather"
-
-            onChange={e=> this.setState({text: e.target.value})}
-
-            style={{width:'100%',marginLeft:8}}
-
-          />
+        <Input
+value={text}
+placeholder="Search for Weather"
+style={{width:'100%',height:'45px', borderWidth:'2px', borderRadius:'5px', marginLeft:8}}
+onChange={e => this.setState({ text: e.target.value })}
+/>
           <Button 
           color="primary"
 
@@ -165,7 +154,7 @@ class App extends React.Component {
 
         </form>
 
-        {loading && <LinearProgress />}
+        {loading && <Spin indicator={antIcon} />}
 
         <main>
 
