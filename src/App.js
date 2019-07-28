@@ -2,14 +2,9 @@ import React from 'react';
 
 import './App.css';
 
-//import Button from '@material-ui/core/Button';
-
-import Button from 'react-bootstrap/Button';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import { Button } from 'reactstrap';
 
 import TextField from '@material-ui/core/TextField';
-
-import SearchIcon from '@material-ui/icons/Search';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -154,25 +149,19 @@ class App extends React.Component {
             style={{width:'100%',marginLeft:8}}
 
           />
+          <Button 
+          color="primary"
 
-          <ButtonToolbar>
-          <Button variant="outline-primary"
-
-            //color="primary"
-
-            //disabled={loading || !text} 
+            disabled={loading || !text} 
 
             type="submit"
 
-            style={{width:100, margin:'0 10px', height:55}}>
+            style={{width:100, margin:'0 10px', height:45}}>
 
-            {/*<SearchIcon style={{marginRight:8}} />*/}
 
             Search
 
     </Button>
-    </ButtonToolbar>
-
 
         </form>
 
